@@ -16,6 +16,12 @@ public class HomePage extends BasePage {
     private By emailField = By.id("email");
     private By nextButton = By.id("enterimg");
 
+    //SignIn page
+    private By usernameBy = By.xpath("//input[@ng-model='Email']");
+    private By passwordBy = By.xpath("//input[@ng-model='Password']");
+    private By loginUser = By.id("enterbtn");
+
+
     private HomePage(){
     }
 
@@ -49,6 +55,18 @@ public class HomePage extends BasePage {
     public void checkEmailField(String email){
         LOG.info("Check email field");
         driver.findElement(emailField).sendKeys(email);
+    }
+
+    public void clickNextButton(){
+        LOG.info("Click Next button");
+        driver.findElement(nextButton).click();
+    }
+
+    public void  signIn(String userName, String password){
+        LOG.info("Sign in user");
+        driver.findElement(usernameBy).sendKeys(userName);
+        driver.findElement(passwordBy).sendKeys(password);
+        driver.findElement(loginUser).click();
     }
 
 }
