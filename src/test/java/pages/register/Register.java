@@ -1,11 +1,14 @@
 package pages.register;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.BasePage;
 
+import javax.swing.*;
 import java.nio.channels.SelectableChannel;
 
 public class Register extends BasePage {
@@ -44,6 +47,26 @@ public class Register extends BasePage {
 
     //Skills
     String selectSkills = "Skills";
+
+    //Country
+    private By selectCountry = By.xpath("//span[@role='combobox']");
+    private By eneterCountry = By.xpath("//input[@role='textbox']");
+
+    //Date Of Birth
+    String selectYear = "yearbox";
+    String selectMonth = "//select[@ng-model='monthbox']";
+    String selectDay = "daybox";
+
+    //Password
+    private By password = By.id("firstpassword");
+    private By confirmPassword = By.id("secondpassword");
+
+    //Choose a File
+    private By chooseFileBtn = By.id("imagesrc");
+
+    //Submit Button
+    private By submitButton = By.id("submitbtn");
+    //----------------------------Form---------------------------------
 
 
     private Register(){
@@ -117,5 +140,45 @@ public class Register extends BasePage {
         LOG.info("Set Skill");
         Select newSkill = new Select (driver.findElement(By.id(selectSkills)));
         newSkill.selectByValue(skill);
+    }
+
+    public void setCountry(String country){
+        LOG.info("Set Country");
+        driver.findElement(selectCountry).click();
+        driver.findElement(eneterCountry).sendKeys(country);
+    }
+
+    public void setDateOfBirth(String year, String month, String day){
+        LOG.info("Set Date Of Birth");
+        Select newYear = new Select(driver.findElement(By.id(selectYear)));
+        newYear.selectByValue(year);
+        Select newMonth = new Select(driver.findElement(By.xpath(selectMonth)));
+        newMonth.selectByValue(month);
+        Select newDay = new Select(driver.findElement(By.id(selectDay)));
+        newDay.selectByValue(day);
+    }
+
+    public void setPassword (String pass, String confirmPass){
+        LOG.info("Set Password");
+        driver.findElement(password).sendKeys(pass);
+        driver.findElement(confirmPassword).sendKeys(confirmPass);
+    }
+
+    public void setChooseFile(){
+        LOG.info("Upload a File");
+        WebElement fileChoose = driver.findElement(chooseFileBtn);
+        fileChoose.sendKeys("C://Img//download.png");
+    }
+
+    public void clickSubmitButton(){
+        LOG.info("CLick the Submit button");
+        driver.findElement(submitButton).click();
+    }
+
+    public void scrollToElement(){
+        WebElement element = driver.findElement(submitButton);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element);
+        actions.perform();
     }
 }
