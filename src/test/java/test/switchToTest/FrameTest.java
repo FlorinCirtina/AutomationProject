@@ -12,5 +12,7 @@ public class FrameTest extends BaseTest {
     @Test
     public void CheckFrames() {
         driver.get(newUrl);
+        frames.clickSingleFrame();
+        frames.clickMultipleFrame();
     }
 }

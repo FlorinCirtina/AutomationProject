@@ -7,6 +7,12 @@
             </class>
             <class name="test.registerTest.RegisterTest">
             </class>
+            <class name="test.switchToTest.AlertTest">
+            </class>
+            <class name="test.switchToTest.WindowTest">
+            </class>
+            <class name="test.switchToTest.FrameTest">
+            </class>
         </classes>
     </test>
 
